@@ -25,18 +25,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox
 
-      - name: Build image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          tox -e docker -- --tag=ghcr.io/jketelaar/awx-ee:latest
-
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Build image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          tox -e docker -- --tag=ghcr.io/jketelaar/awx-ee:latest
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
