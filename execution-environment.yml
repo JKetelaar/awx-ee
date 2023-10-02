@@ -51,6 +51,10 @@ dependencies:
     python-daemon
     pyyaml
     six
+    zabbix-api
+    jinja2>=2.11.2
+    ipaddr
+    netaddr
 additional_build_steps:
   append_base:
     - RUN $PYCMD -m pip install -U pip
